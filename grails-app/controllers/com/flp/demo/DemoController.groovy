@@ -1,6 +1,7 @@
 package com.flp.demo
 
 import com.budjb.rabbitmq.publisher.RabbitMessagePublisher
+import com.flpi.demo.FlpiConsumer
 
 class DemoController {
 	RabbitMessagePublisher rabbitMessagePublisher
@@ -8,16 +9,12 @@ class DemoController {
     def index() { }
 
     def postMessage() {
-       	println "${request.dump()}"
-       	println "params"
-       	println "${request.parameters}"
-       	println "${request.parameters.getClass()}"
-       	println "${request.parameters.keySet()[0]}"
-
-    	//rabbitMessagePublisher.send {
-    		//exchange = "demographics.exchange"
-            //body = request.JSON
-        //}
+       	
+    	rabbitMessagePublisher.send {
+    		exchange = "demographics.exchange"
+            body = request.parameters.keySet()[0]
+            deliveryMode = 1
+        }
     	render "Congratulations Message successfully posted !!!!!!"
     }
 
@@ -26,6 +23,7 @@ class DemoController {
     }
 
     def consumeMessages() {
-        render "Congratulations Started Consuming Messages !!!!!!"	
+        //render FlpiConsumer.messages
+        render(view: "consumeMessages", model: [messages: FlpiConsumer.messages])
     }
 }

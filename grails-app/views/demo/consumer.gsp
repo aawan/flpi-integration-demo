@@ -29,7 +29,7 @@
         </div>
 
         <div class="row">                
-          <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit">Start Consuming</button>
+          <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit">Get Consumed Messages</button>
         </div>  
       </form>
 
