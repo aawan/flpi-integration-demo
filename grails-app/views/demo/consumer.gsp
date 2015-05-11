@@ -29,16 +29,24 @@
         </div>
 
         <div class="row">                
-          <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit">Get Consumed Messages</button>
+          <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit">Reset</button>
         </div>  
       </form>
 
     </div> <!-- /container -->
 
     <script>
+
       $("#submit").click(function (event) {
-          event.preventDefault(); 
-                    
+          event.preventDefault();
+          $.ajax({
+              url: "reset",
+              type:"get"
+          }); 
+      });
+
+      function getConsumedMessages() {
+                           
           $.ajax({
               url: "consumeMessages",
               type:"get",
@@ -49,9 +57,16 @@
                    alert(xhr.responseText)
                }
           });
-       }); 
-      
-    
+       }
+
+       $(document).ready(function(){
+           setInterval(function(){
+               getConsumedMessages();
+           }, 3000);
+       });
+       
+
+
     </script>
     
     <style>

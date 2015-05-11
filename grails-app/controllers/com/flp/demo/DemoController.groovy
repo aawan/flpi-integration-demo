@@ -26,4 +26,9 @@ class DemoController {
         //render FlpiConsumer.messages
         render(view: "consumeMessages", model: [messages: FlpiConsumer.messages])
     }
+
+    def reset() {
+        FlpiConsumer.messages.clear()   
+        render "success"
+    }
 }
